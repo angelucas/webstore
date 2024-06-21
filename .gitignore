@@ -1,0 +1,37 @@
+# .gitignore file for a typical C# project
+
+# Ignore Visual Studio temporary files, build results, and
+# folder-based project files.
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+.vscode/
+.vscode/*
+.vs/
+
+# Ignore build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Ignore NuGet packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+
+# Ignore logs and lock files
+*.log
+*.lock
