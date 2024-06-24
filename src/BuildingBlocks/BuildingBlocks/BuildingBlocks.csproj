@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Carter" Version="8.2.1" />
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>
