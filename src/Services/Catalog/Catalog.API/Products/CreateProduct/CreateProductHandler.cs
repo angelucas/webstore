@@ -4,25 +4,41 @@
         : ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
 
-    internal class CreateProductCommandHandler(IDocumentSession session) 
-        : ICommandHandler<CreateProductCommand, CreateProductResult>
+    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
-        public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
+        public CreateProductCommandValidator()
         {
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
+            RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
+            RuleFor(x => x.ImageFile).NotEmpty().WithMessage("ImageFile is required");
+            RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
+        }
 
-            var product = new Product
+        internal class CreateProductCommandHandler(IDocumentSession session, IValidator<CreateProductCommand> validator)
+            : ICommandHandler<CreateProductCommand, CreateProductResult>
+        {
+            public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
             {
-                Name = command.Name,
-                Category = command.Category,
-                Description = command.Description,
-                ImageFile = command.ImageFile,
-                Price = command.Price,
-            };
+                var result = await validator.ValidateAsync(command, cancellationToken);
+                var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
 
-            session.Store(product);
-            await session.SaveChangesAsync(cancellationToken);
+                if (errors.Any())
+                    throw new ValidationException(errors.FirstOrDefault());
 
-            return new CreateProductResult(product.Id);
+                var product = new Product
+                {
+                    Name = command.Name,
+                    Category = command.Category,
+                    Description = command.Description,
+                    ImageFile = command.ImageFile,
+                    Price = command.Price,
+                };
+
+                session.Store(product);
+                await session.SaveChangesAsync(cancellationToken);
+
+                return new CreateProductResult(product.Id);
+            }
         }
     }
 }
