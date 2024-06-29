@@ -6,3 +6,7 @@ global using BuildingBlocks.CQRS;
 global using Catalog.API.Models;
 global using Catalog.API.Exceptions;
 global using FluentValidation;
+global using Microsoft.AspNetCore.Diagnostics;
+global using Microsoft.AspNetCore.Mvc;
+global using BuildingBlocks.Behaviors;
+global using BuildingBlocks.Exceptions.Handler;
