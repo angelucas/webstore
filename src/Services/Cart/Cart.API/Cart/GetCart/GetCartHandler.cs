@@ -2,11 +2,14 @@
 {
     public record GetCartQuery(string UserName) : IQuery<GetCartResult>;
     public record GetCartResult(ShoppingCart Cart);
-    public class GetCartQueryHandler : IQueryHandler<GetCartQuery, GetCartResult>
+    public class GetCartQueryHandler(ICartRepository repository) 
+        : IQueryHandler<GetCartQuery, GetCartResult>
     {
-        public async Task<GetCartResult> Handle(GetCartQuery request, CancellationToken cancellationToken)
+        public async Task<GetCartResult> Handle(GetCartQuery query, CancellationToken cancellationToken)
         {
-            return new GetCartResult(new ShoppingCart("swn"));
+            var cart = await repository.GetCart(query.UserName);
+
+            return new GetCartResult(cart);
         }
     }
 }
