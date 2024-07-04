@@ -15,12 +15,12 @@ namespace Cart.API.Cart.DeleteCart
 
                 return Results.Ok(response);
             })
-            .WithName("DeleteProduct")
+            .WithName("DeleteCart")
             .Produces<GetCartResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound)
-            .WithSummary("Delete Product")
-            .WithDescription("Delete Product");
+            .WithSummary("Delete Cart")
+            .WithDescription("Delete Cart");
         }
     }
 }
