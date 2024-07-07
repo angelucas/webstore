@@ -5,7 +5,7 @@ namespace Cart.API.Cart.DeleteCart
     public record DeleteCartResponse(bool IsSuccess);
     public class DeleteCartEndpoint : ICarterModule
     {
-        public async void AddRoutes(IEndpointRouteBuilder app)
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
             app.MapDelete("/carrinho/{userName}", async (string userName, ISender sender) =>
             {
