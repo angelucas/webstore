@@ -1,18 +1,27 @@
 version: '3.4'
 
 services:	
-    catalogdb:
-        image: postgres
+  catalogdb:
+      image: postgres
 
-    cartdb:
-        image: postgres
+  cartdb:
+      image: postgres
 
-    catalog.api:
-      image: ${DOCKER_REGISTRY-}catalogapi
-      build:
-        context: .
-        dockerfile: Services/Catalog/Catalog.API/Dockerfile
+  distributedcache:
+      image: redis
+
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+
+  cart.api:
+    image: ${DOCKER_REGISTRY-}cartapi
+    build:
+      context: .
+      dockerfile: Services/Cart/Cart.API/Dockerfile
 
 volumes:
-    postgres_catalog:
-    postgres_cart:
+  postgres_catalog:
+  postgres_cart:
