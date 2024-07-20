@@ -1,7 +1,6 @@
 ﻿namespace Ordering.Domain
 {
-    public class Class1
+    internal class DependencyInjection
     {
-
     }
 }
