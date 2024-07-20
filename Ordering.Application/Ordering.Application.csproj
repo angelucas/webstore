@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
+    <ProjectReference Include="..\src\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
+  </ItemGroup>
+
 </Project>
