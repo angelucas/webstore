@@ -29,7 +29,7 @@
                 Status = OrderStatus.Pending,
             };
 
-            order.AddDomainEvent(new OnderCreatedEvent(order));
+            order.AddDomainEvent(new OrderCreatedEvent(order));
 
             return order;
         }
