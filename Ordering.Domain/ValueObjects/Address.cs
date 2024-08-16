@@ -1,4 +1,6 @@
-﻿namespace Ordering.Domain.ValueObjects
+﻿using System.Reflection.Emit;
+
+namespace Ordering.Domain.ValueObjects
 {
     public record Address
     {
@@ -13,7 +15,7 @@
         {
         }
 
-        private Address(string firstName, string lastName, string emailAddres, string addresLine, string country, string state, string xipCode)
+        private Address(string firstName, string lastName, string emailAddres, string addresLine, string country, string state, string zipCode)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -21,15 +23,15 @@
             AddressLine = addresLine;
             Country = country;
             State = state;
-            ZipCode = xipCode;
+            ZipCode = zipCode;
         }
 
-        public static Address Of(string firstName, string lastName, string emailAddres, string addresLine, string country, string state, string xipCode)
+        public static Address Of(string firstName, string lastName, string emailAddres, string addresLine, string country, string state, string zipCode)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(emailAddres);
             ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
 
-            return new Address(firstName, lastName, emailAddres, addresLine, country, state, xipCode);
+            return new Address(firstName, lastName, emailAddres, addresLine, country, state, zipCode);
         }
     }
 }
